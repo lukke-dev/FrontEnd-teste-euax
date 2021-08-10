@@ -18,20 +18,23 @@ const HomePage = () => {
       project.map(async (value) => {
         const id = value._id;
         const act = await getActivies(id);
-        const qtdTotal = act.length;
-        const qtdTrue = act.filter((obj) => obj.finished === true).length;
-        const date = act.filter(
-          (obj) => new Date(obj.endDate) > new Date(value.endDate)
-        ).length;
-        const porc = (Number(qtdTrue) * 100) / Number(qtdTotal);
-        const porcFixed = porc.toFixed(1);
-        activies[id] = { qtdTotal, qtdTrue, porcFixed, date };
+        if (act) {
+          const qtdTotal = act.length;
+          const qtdTrue = act.filter((obj) => obj.finished === true).length;
+          const date = act.filter(
+            (obj) => new Date(obj.endDate) > new Date(value.endDate)
+          ).length;
+          const porc = (Number(qtdTrue) * 100) / Number(qtdTotal);
+          const porcFixed = porc.toFixed(1);
+          activies[id] = { qtdTotal, qtdTrue, porcFixed, date };
+        }
       });
       setProjects(project);
-      return setIsLoad(false);
+      setIsLoad(false);
     };
     showProjects();
   }, [activies, isLoad]);
+
   const handleDelete = async (id) => {
     await delProject(id);
     toast.info('Projeto deletado com sucesso!');
