@@ -1,5 +1,3 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from 'react';
 import { FaWindowClose, FaExchangeAlt } from 'react-icons/fa';
 import { Link, useHistory, useLocation } from 'react-router-dom';
@@ -38,7 +36,7 @@ const ListOne = () => {
       setIsLoad(false);
     };
     showProject();
-  }, []);
+  }, [idProject]);
   const handleDelete = async (id) => {
     setIsLoad(true);
     await delProject(id);
@@ -157,9 +155,11 @@ const ListOne = () => {
             ))}
         </tbody>
       </S.Table>
-      <Link to={project && `/newactivity/${project._id}`}>
-        <S.Button type="button">+ Nova Atividade</S.Button>
-      </Link>
+      {project && (
+        <Link to={`/newactivity/${project._id}`}>
+          <S.Button type="button">+ Nova Atividade</S.Button>
+        </Link>
+      )}
     </S.Wrapper>
   );
 };
