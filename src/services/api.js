@@ -23,7 +23,7 @@ export const getActivies = async (id) =>
   Axios.get(`${baseUrl}/activies/${id}`).then((resp) => resp.data);
 
 export const getProjectByName = async (name) =>
-  Axios.get(`${baseUrl}/name/${name}`).then((resp) => resp.data);
+  Axios.get(`${baseUrl}/name/${name}`);
 
 export const delProject = async (id) => {
   Axios.delete(`${baseUrl}/del/${id}`);
