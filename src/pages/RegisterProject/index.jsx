@@ -33,7 +33,8 @@ const RegisterProject = () => {
       )
         return toast.error('Data vazia ou inválida!');
       const name = await getProjectByName(nameProject);
-      if (name) return toast.error('Já existe um projeto com este nome!');
+      if (name !== null)
+        return toast.error('Já existe um projeto com este nome!');
       const resp = await newProject(
         nameProject,
         startDateProject,
