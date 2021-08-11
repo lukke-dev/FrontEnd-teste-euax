@@ -16,7 +16,8 @@ const RegisterProject = () => {
     if (nameActivity === '') return toast.error('Nome da atividade vazio!');
     if (!regEx.test(startDateActivity) || !regEx.test(endDateActivity))
       return toast.error('Data vazia ou inválida!');
-
+    if (new Date(startDateActivity) >= new Date(endDateActivity))
+      return toast.error('Data inicial não pode ser maior que a data final');
     await newActivity(
       nameActivity,
       idProject,

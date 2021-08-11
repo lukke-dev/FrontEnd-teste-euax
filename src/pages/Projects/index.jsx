@@ -6,7 +6,7 @@ import * as S from './styles';
 import { getProjects, delProject, getActivies } from '../../services/api';
 import Loading from '../../components/Loading';
 
-const HomePage = () => {
+const Projects = () => {
   const [projects, setProjects] = useState([]);
   const [isLoad, setIsLoad] = useState(true);
   const [activies] = useState([]);
@@ -62,7 +62,7 @@ const HomePage = () => {
           {!isLoad &&
             projects.map((value) => {
               const { porcFixed } = activies[value._id] || 0;
-              const { date } = activies[value._id] || 0;
+              const { date } = activies[value._id] || 3;
 
               return (
                 <tr key={value._id}>
@@ -105,4 +105,4 @@ const HomePage = () => {
   );
 };
 
-export default HomePage;
+export default Projects;

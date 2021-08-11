@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import { useState } from 'react';
 import { toast } from 'react-toastify';
 import { useHistory } from 'react-router-dom';
@@ -16,8 +15,12 @@ const RegisterProject = () => {
   const regEx = /(20)\d{2}-\d{2}-\d{2}/;
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (new Date(startDateProject) >= new Date(endDateProject))
+      return toast.error('Data inicial não pode ser maior que a data final');
     if (nameProject === '') return toast.error('Nome do projeto vazio!');
     if (nameActivity === '') return toast.error('Nome da atividade vazio!');
+    if (new Date(startDateActivity) >= new Date(endDateActivity))
+      return toast.error('Data inicial não pode ser maior que a data final');
     if (
       !regEx.test(startDateProject) ||
       !regEx.test(endDateProject) ||
