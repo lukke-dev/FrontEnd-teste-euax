@@ -15,6 +15,7 @@ const RegisterProject = () => {
   const [endDateActivity, setEndDateActivity] = useState('');
   const history = useHistory();
   const regEx = /(20)\d{2}-\d{2}-\d{2}/;
+
   const handleSubmit = async (e) => {
     setIsLoad(true);
     e.preventDefault();
@@ -33,24 +34,22 @@ const RegisterProject = () => {
       )
         return toast.error('Data vazia ou inválida!');
       const name = await getProjectByName(nameProject);
+      if (name) return toast.error('Já existe um projeto com este nome!');
 
-      if (name !== 'error') {
-        const resp = await newProject(
-          nameProject,
-          startDateProject,
-          endDateProject
-        );
-        await newActivity(
-          nameActivity,
-          resp._id,
-          startDateActivity,
-          endDateActivity
-        );
-        setIsLoad(false);
-        history.push('/projects');
-        return toast.info('Projeto criado com sucesso!');
-      }
-      return toast.error('Já existe um projeto com este nome!');
+      const resp = await newProject(
+        nameProject,
+        startDateProject,
+        endDateProject
+      );
+      await newActivity(
+        nameActivity,
+        resp._id,
+        startDateActivity,
+        endDateActivity
+      );
+      setIsLoad(false);
+      history.push('/projects');
+      return toast.info('Projeto criado com sucesso!');
     } catch (err) {
       return err;
     } finally {

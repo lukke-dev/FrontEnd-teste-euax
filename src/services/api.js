@@ -22,11 +22,8 @@ export const getProjects = async (id) => {
 export const getActivies = async (id) =>
   Axios.get(`${baseUrl}/activies/${id}`).then((resp) => resp.data);
 
-export const getProjectByName = async (name) => {
-  const resp = await Axios.get(`${baseUrl}/name/${name}`);
-  if (resp) return 'error';
-  return resp.data;
-};
+export const getProjectByName = async (name) =>
+  Axios.get(`${baseUrl}/name/${name}`).then((resp) => resp.data);
 
 export const delProject = async (id) => {
   Axios.delete(`${baseUrl}/del/${id}`);
