@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { toast } from 'react-toastify';
 import { useHistory } from 'react-router-dom';
 import * as S from './styles';
-import { newProject, newActivity, getProjectByName } from '../../services/api';
+import { newProject, newActivity } from '../../services/api';
 import Loading from '../../components/Loading';
 
 const RegisterProject = () => {
@@ -33,8 +33,6 @@ const RegisterProject = () => {
         !regEx.test(endDateActivity)
       )
         return toast.error('Data vazia ou inválida!');
-      const name = await getProjectByName(nameProject);
-      if (name._id) return toast.error('Já existe um projeto com este nome!');
 
       const resp = await newProject(
         nameProject,
